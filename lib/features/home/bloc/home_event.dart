@@ -7,7 +7,7 @@ class HomePageWishlistButtonClickedEvent extends HomeEvent{
 
 }
 
-class HomePageLikeButtonClickedEvent extends HomeEvent{
+class HomePageCartButtonClickedEvent extends HomeEvent{
 
 }
 
@@ -15,7 +15,7 @@ class HomePageWishlistButtonNavigateEvent extends HomeEvent{
 
 }
 
-class HomePageLikeButtonNavigateEvent extends HomeEvent{
+class HomePageCartButtonNavigateEvent extends HomeEvent{
 
 }
 
