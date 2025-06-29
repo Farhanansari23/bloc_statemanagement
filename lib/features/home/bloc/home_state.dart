@@ -12,7 +12,7 @@ class HomePageLoadingSuccessState extends HomeState{}
 
 class HomePageLoadingErrorState extends HomeState{}
 
-class HomeNavigateToWishlistPageClickedState extends HomeActionableState{}
+class HomeNavigateToWishlistPageClickedActionState extends HomeActionableState{}
 
-class HomeNavigateToCartPageClickedState extends HomeActionableState{}
+class HomeNavigateToCartPageClickedActionState extends HomeActionableState{}
 
