@@ -22,6 +22,7 @@ class _WishListPageState extends State<WishListPage> {
       child: AppBar(
         title: Text('WishList Page'),
         centerTitle: true,
+        backgroundColor: Colors.teal,
       ),
     );
   }
