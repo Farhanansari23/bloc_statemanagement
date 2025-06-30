@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: AppBar(
         title: Text('Central Bazaar'),
         centerTitle: true,
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.teal,
         actions: [
           IconButton(
             onPressed: () {

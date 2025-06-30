@@ -22,6 +22,7 @@ class _CartPageState extends State<CartPage> {
         child: AppBar(
           title: Text('Cart Page'),
           centerTitle: true,
+          backgroundColor: Colors.teal,
         ),
     );
   }
