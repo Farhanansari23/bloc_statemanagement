@@ -4,6 +4,8 @@ import 'package:bloc_statemanagement/features/home/bloc/home_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_statemanagement/features/wishlist/ui/wishlist.dart'; // Add this
 import 'package:bloc_statemanagement/features/cart/ui/cart.dart'; // Add this
+import 'package:bloc_statemanagement/features/home/ui/product_tile_widget.dart';
+import 'package:bloc_statemanagement/features/home/models/home_product_model.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -13,6 +15,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+
+  @override
+  void initState() {
+    homeBloc.add(HomePageInitialEvent());
+    super.initState();
+  }
+
   final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
@@ -29,10 +39,33 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       },
       builder: (context, state) {
-        return Scaffold(
+      switch(state.runtimeType){
+        case HomePageLoadingState:
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        case HomePageLoadingSuccessState:
+          final successState = state as HomePageLoadingSuccessState;
+          return Scaffold(
             appBar: _appBar(context),
-            body: _body(context),
-        );
+            body: ListView.builder(
+              itemCount: successState.products.length,
+              itemBuilder: (context, index) {
+                return ProductTileWidget(productsDataModel: successState.products[index]);
+              },
+            ),
+          );
+          case HomePageLoadingErrorState:
+            return Scaffold(
+              body: Center(
+                child: Text('Error'),
+              ),
+            );
+          default:
+            return SizedBox();
+      };
       },
     );
   }
@@ -62,7 +95,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _body(context) {
-    return Container(child: Text('Coming soon'));
-  }
+//   Widget _body(context) {
+//     // final successState = state as HomePageLoadingSuccessState;
+//     return null;
+//   }
+
 }
+
+
+
+
