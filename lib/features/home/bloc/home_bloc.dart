@@ -19,10 +19,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
     on<HomePageCartButtonNavigateEvent>(homePageCartButtonNavigateEvent);
   }
-  FutureOr<void> homePageInitialEvent(
-    HomePageInitialEvent event,
-    Emitter<HomeState> emit,
-  ) async {
+
+  FutureOr<void> homePageInitialEvent(HomePageInitialEvent event, Emitter<HomeState> emit,) async {
     emit(HomePageLoadingState());
     await Future.delayed(Duration(seconds: 3));
     emit(
@@ -33,7 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   (e) => ProductsDataModel(
                     id: e['id'],
                     name: e['name'],
-                    description: e['category'],
+                    description: e['description'],
                     price: e['price'],
                     imageUrl: e['imageUrl'],
                   ),
