@@ -1,3 +1,5 @@
+import 'package:bloc_statemanagement/features/home/models/home_product_model.dart';
+
 part of 'home_bloc.dart';
 
 @immutable
@@ -8,11 +10,14 @@ class HomePageInitialEvent extends HomeEvent{
 }
 
 class HomePageWishlistButtonClickedEvent extends HomeEvent{
+  final ProductsDataModel likedProduct;
+  HomePageWishlistButtonClickedEvent({required this.likedProduct});
 
 }
 
 class HomePageCartButtonClickedEvent extends HomeEvent{
-
+ final ProductsDataModel cartProduct;
+ HomePageCartButtonClickedEvent({required this.cartProduct});
 }
 
 class HomePageWishlistButtonNavigateEvent extends HomeEvent{
