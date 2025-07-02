@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
             body: ListView.builder(
               itemCount: successState.products.length,
               itemBuilder: (context, index) {
-                return ProductTileWidget(productsDataModel: successState.products[index]);
+                return ProductTileWidget(productsDataModel: successState.products[index],homeBloc: homeBloc,);
               },
             ),
           );
