@@ -22,3 +22,7 @@ class HomeNavigateToWishlistPageClickedActionState extends HomeActionableState{}
 
 class HomeNavigateToCartPageClickedActionState extends HomeActionableState{}
 
+class HomePageItemAddedToWishListActionState extends HomeActionableState{}
+
+class HomePageItemAddedToCartActionState extends HomeActionableState{}
+
