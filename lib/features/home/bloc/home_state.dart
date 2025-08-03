@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:bloc_statemanagement/features/home/models/home_product_model.dart';
-
 part of 'home_bloc.dart';
 
 @immutable

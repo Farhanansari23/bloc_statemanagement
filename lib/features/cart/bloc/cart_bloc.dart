@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:bloc_statemanagement/features/home/models/home_product_model.dart';
 import 'package:meta/meta.dart';
 import 'dart:async';
 import 'package:bloc_statemanagement/data/cart_items.dart';
