@@ -7,7 +7,7 @@ class ProductTileWidget extends StatelessWidget {
   final ProductsDataModel productsDataModel;
   final HomeBloc homeBloc;
 
-  ProductTileWidget({
+  const ProductTileWidget({
     super.key,
     required this.productsDataModel,
     required this.homeBloc,
@@ -49,7 +49,7 @@ class ProductTileWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "\$" + productsDataModel.price.toString(),
+                "\$${productsDataModel.price}",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Row(
