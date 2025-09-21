@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bloc_statemanagement/features/wishlist/bloc/wishlist_bloc.dart';
 
 class WishListPage extends StatefulWidget {
   const WishListPage({super.key});
@@ -8,6 +9,16 @@ class WishListPage extends StatefulWidget {
 }
 
 class _WishListPageState extends State<WishListPage> {
+
+  final WishlistBloc wishListBloc = WishlistBloc();
+
+  // @override
+  // void initState() {
+  //   cartBloc.add(CartInitialEvent());
+  //   super.initState();
+  // }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
