@@ -109,10 +109,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-//   Widget _body(context) {
-//     // final successState = state as HomePageLoadingSuccessState;
-//     return null;
-//   }
 
 }
 
