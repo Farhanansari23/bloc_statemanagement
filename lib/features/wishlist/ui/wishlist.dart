@@ -45,8 +45,8 @@ class _WishListPageState extends State<WishListPage> {
     return BlocConsumer<WishlistBloc, WishlistState>(
       bloc: wishListBloc,
       listener: (context, state) {},
-      listenWhen: (previous, current) => current is WishlistSuccessState,
-      buildWhen: (previous, current) => current is  !WishlistSuccessState,
+      listenWhen: (previous, current) => current is WishListActionableState,
+      buildWhen: (previous, current) => current is  !WishListActionableState,
       builder: (context,state){
         switch(state.runtimeType){
           case WishlistSuccessState:

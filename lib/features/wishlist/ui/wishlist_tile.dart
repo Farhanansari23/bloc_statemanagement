@@ -56,20 +56,13 @@ class WishlistTile extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      // homeBloc.add(
-                      //     HomePageWishlistButtonClickedEvent(
-                      //   likedProduct: productsDataModel,
-                      // ));
+                     wishListBloc.add(RemoveFromWishListEvent(productsDataModel: productsDataModel));
                     },
-                    icon: FaIcon(FontAwesomeIcons.heart),
+                    icon: FaIcon(FontAwesomeIcons.heartCircleCheck),
                   ),
                   IconButton(
                     onPressed: () {
-                      // homeBloc.add(
-                      //   HomePageCartButtonClickedEvent(
-                      //     cartProduct: productsDataModel,
-                      //   ),
-                      // );
+
                     },
                     icon: FaIcon(FontAwesomeIcons.cartShopping),
                   ),
