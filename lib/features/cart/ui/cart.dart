@@ -21,7 +21,9 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: _appBar(context), body: _body(context));
+    return Scaffold(
+        appBar: _appBar(context),
+        body: _body(context));
   }
 
   PreferredSize _appBar(context) {
