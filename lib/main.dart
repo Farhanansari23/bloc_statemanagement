@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'features/home/ui/home.dart';
+import 'package:bloc_statemanagement/features/counter/ui/counter_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(),
+      home: const CounterPage(),
+      // home: const MyHomePage(),
     );
   }
 }
