@@ -15,10 +15,14 @@ class _CounterPageState extends State<CounterPage> {
   final CounterBloc counterBloc = CounterBloc();
 
   @override
-  void initState(){
+  void initState() {
     counterBloc.add(CounterIncrementEvent());
+    counterBloc.add(CounterAddButtonEvent());
     super.initState();
   }
+
+  int value = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,31 +51,62 @@ class _CounterPageState extends State<CounterPage> {
 
   Widget _body(context) {
     print('hello');
-    return BlocBuilder<CounterBloc, CounterState>(
+    return BlocListener<CounterBloc, CounterState>(
       bloc: counterBloc,
-      builder: (context, state) {
-        switch(state.runtimeType){
-          case CounterIncrementState:
-            final successState = state as CounterIncrementState;
-            return Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  // Text('You have pushed the button many times'),
-                  Center(
-                    child: Text(successState.val.toString(),style: TextStyle(fontSize: 64,fontWeight: FontWeight.bold)),
-                  )
-                  // Text('$_counter times'),
-                ],
-              ),
-            );
-          default:
-            return Center(
-              child: Text('Not Found'),
-            );
-        };
+      listener: (context, state) {
+      if(state is CounterSnackBarState){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SnackBar')));
+      } else if(state is CounterAddButtonState){
+        setState(() {
+          value = value + 1;
+        });
+      }
       },
+      child: Center(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(value.toString(), style: TextStyle(
+                    fontSize: 64, fontWeight: FontWeight.bold)),
+              ),
+              ElevatedButton(onPressed: () {
+                counterBloc.add(CounterAddButtonEvent());
+              }, child: Text('ADD')),
+              ElevatedButton(onPressed: () {counterBloc.add(CounterSnackBarEvent());}, child: Text('SnackBar')),
+
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
+
+// BlocBuilder<CounterBloc, CounterState>(
+// bloc: counterBloc,
+// builder: (context, state) {
+// switch(state.runtimeType){
+// case CounterIncrementState:
+// final successState = state as CounterIncrementState;
+// return Container(
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.center,
+// crossAxisAlignment: CrossAxisAlignment.end,
+// children: [
+// // Text('You have pushed the button many times'),
+// Center(
+// child: Text(successState.val.toString(),style: TextStyle(fontSize: 64,fontWeight: FontWeight.bold)),
+// )
+// // Text('$_counter times'),
+// ],
+// ),
+// );
+// default:
+// return Center(
+// child: Text('Not Found'),
+// );
+// };
+// },
+// )
