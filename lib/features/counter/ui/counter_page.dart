@@ -11,7 +11,6 @@ class CounterPage extends StatefulWidget {
 }
 
 class _CounterPageState extends State<CounterPage> {
-
   final CounterBloc counterBloc = CounterBloc();
 
   @override
@@ -34,7 +33,6 @@ class _CounterPageState extends State<CounterPage> {
         },
         child: Icon(Icons.add),
       ),
-
     );
   }
 
@@ -51,38 +49,80 @@ class _CounterPageState extends State<CounterPage> {
 
   Widget _body(context) {
     print('hello');
-    return BlocListener<CounterBloc, CounterState>(
+    return BlocConsumer<CounterBloc, CounterState>(
       bloc: counterBloc,
+      listenWhen: (previous, current) => current is CounterActionState,
+      buildWhen: (previous, current) => current is! CounterActionState,
       listener: (context, state) {
-      if(state is CounterSnackBarState){
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SnackBar')));
-      } else if(state is CounterAddButtonState){
-        setState(() {
-          value = value + 1;
-        });
-      }
+        if (state is CounterSnackBarState) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('SnackBar')));
+        }
       },
-      child: Center(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: Text(value.toString(), style: TextStyle(
-                    fontSize: 64, fontWeight: FontWeight.bold)),
+      builder: (context, state) {
+        switch (state.runtimeType) {
+          case CounterIncrementState:
+            final successState = state as CounterIncrementState;
+            return Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Text('You have pushed the button many times'),
+                  Center(
+                    child: Text(
+                      successState.val.toString(),
+                      style: TextStyle(
+                        fontSize: 64,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(onPressed: () {counterBloc.add(CounterSnackBarEvent());}, child: Text('SnackBar')),
+                  // Text('$_counter times'),
+                ],
               ),
-              ElevatedButton(onPressed: () {
-                counterBloc.add(CounterAddButtonEvent());
-              }, child: Text('ADD')),
-              ElevatedButton(onPressed: () {counterBloc.add(CounterSnackBarEvent());}, child: Text('SnackBar')),
-
-            ],
-          ),
-        ),
-      ),
+            );
+          default:
+            return Center(child: Text('Not Found'));
+        }
+        ;
+      },
     );
   }
 }
+
+// BlocListener<CounterBloc, CounterState>(
+// bloc: counterBloc,
+// listener: (context, state) {
+// if(state is CounterSnackBarState){
+// ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SnackBar')));
+// } else if(state is CounterAddButtonState){
+// setState(() {
+// value = value + 1;
+// });
+// }
+// },
+// child: Center(
+// child: Container(
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+// Center(
+// child: Text(value.toString(), style: TextStyle(
+// fontSize: 64, fontWeight: FontWeight.bold)),
+// ),
+// ElevatedButton(onPressed: () {
+// counterBloc.add(CounterAddButtonEvent());
+// }, child: Text('ADD')),
+// ElevatedButton(onPressed: () {counterBloc.add(CounterSnackBarEvent());}, child: Text('SnackBar')),
+//
+// ],
+// ),
+// ),
+// ),
+// )
 
 // BlocBuilder<CounterBloc, CounterState>(
 // bloc: counterBloc,
