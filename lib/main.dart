@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'features/home/ui/home.dart';
 import 'package:bloc_statemanagement/features/counter/ui/counter_page.dart';
+import 'package:bloc_statemanagement/equtable_package/equtable.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const CounterPage(),
+      home: const EquatableTesting(),
+      // home: const CounterPage(),
       // home: const MyHomePage(),
     );
   }
