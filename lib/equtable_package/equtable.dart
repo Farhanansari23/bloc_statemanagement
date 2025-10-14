@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 
 class EquatableTesting extends StatefulWidget {
   const EquatableTesting({super.key});
@@ -53,10 +54,10 @@ class _EquatableTestingState extends State<EquatableTesting> {
         FloatingActionButton(
           onPressed: () {
             Person person1 = Person(name: 'Farhan', age: 23);
-            Person person2 = Person(name: 'Amir', age: 21);
-
-            print(person1 == person2);
+            Person person2 = Person(name: 'Farhan', age: 23);
             print(person1.hashCode.toString());
+            print(person2.hashCode.toString());
+            print(person1 == person2);
           },
           child: Icon(Icons.add),
           shape: RoundedRectangleBorder(
@@ -69,8 +70,11 @@ class _EquatableTestingState extends State<EquatableTesting> {
 
 }
 
-class Person{
+class Person extends Equatable{
   final String? name;
   final int age;
   const Person({required this.name, required this.age});
+
+  @override
+  List<Object?> get props => [name ,age];
 }
