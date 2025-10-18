@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:async';
+import 'dart:core';
+import 'package:bloc_statemanagement/features/switch_example/bloc/switch_bloc.dart';
 
 class SwitchExample extends StatefulWidget {
   const SwitchExample({super.key});
@@ -10,10 +14,7 @@ class SwitchExample extends StatefulWidget {
 class _SwitchExampleState extends State<SwitchExample> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: _appBar(context),
-      body: _body(context),
-    );
+    return Scaffold(appBar: _appBar(context), body: _body(context));
   }
 
   PreferredSize _appBar(context) {
@@ -27,27 +28,52 @@ class _SwitchExampleState extends State<SwitchExample> {
     );
   }
 
-  Widget _body(context){
+  Widget _body(context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text('Notification',style: TextStyle(fontSize: 32,fontWeight: FontWeight.bold),),
-             Switch(value: true, onChanged: (value) {
-                return null;
-            }),
+            const Text(
+              'Notification',
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+            BlocBuilder<SwitchBloc, SwitchState>(
+              builder: (context, state) {
+                return Switch(
+                  value: state.isSwitch,
+                  onChanged: (value) {
+                    context.read<SwitchBloc>().add(
+                      EnableNotificationToggleEvent(),
+                    );
+                  },
+                );
+              },
+            ),
           ],
         ),
-        SizedBox(height: 40,),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.24,
-          width: MediaQuery.of(context).size.width * 0.9,
-          color: Colors.red.withOpacity(0.2),
+        SizedBox(height: 40),
+        BlocBuilder<SwitchBloc, SwitchState>(
+          builder: (context, state) {
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.24,
+              width: MediaQuery.of(context).size.width * 0.9,
+              color: Colors.red.withOpacity(state.slider),
+            );
+          },
         ),
-        SizedBox(height: 40,),
-        Slider(value: 0.4, onChanged: (value){}),
+        SizedBox(height: 40),
+        BlocBuilder<SwitchBloc, SwitchState>(
+          builder: (context, state) {
+            return Slider(
+              value: state.slider,
+              onChanged: (value) {
+                context.read<SwitchBloc>().add(EnableSliderEvent(slider: value));
+              },
+            );
+          },
+        ),
       ],
     );
   }
