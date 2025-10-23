@@ -29,6 +29,7 @@ class _SwitchExampleState extends State<SwitchExample> {
   }
 
   Widget _body(context) {
+    print('slider');
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -41,6 +42,7 @@ class _SwitchExampleState extends State<SwitchExample> {
             ),
             BlocBuilder<SwitchBloc, SwitchState>(
               builder: (context, state) {
+                print('notification');
                 return Switch(
                   value: state.isSwitch,
                   onChanged: (value) {
@@ -56,6 +58,7 @@ class _SwitchExampleState extends State<SwitchExample> {
         SizedBox(height: 40),
         BlocBuilder<SwitchBloc, SwitchState>(
           builder: (context, state) {
+            print('red');
             return Container(
               height: MediaQuery.of(context).size.height * 0.24,
               width: MediaQuery.of(context).size.width * 0.9,
