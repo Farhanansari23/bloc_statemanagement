@@ -41,6 +41,7 @@ class _SwitchExampleState extends State<SwitchExample> {
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             BlocBuilder<SwitchBloc, SwitchState>(
+              buildWhen: (previous,current) => previous.isSwitch != current.isSwitch,
               builder: (context, state) {
                 print('notification');
                 return Switch(
@@ -57,6 +58,7 @@ class _SwitchExampleState extends State<SwitchExample> {
         ),
         SizedBox(height: 40),
         BlocBuilder<SwitchBloc, SwitchState>(
+          buildWhen: (previous, current) => previous.slider != current.slider,
           builder: (context, state) {
             print('red');
             return Container(
@@ -68,7 +70,9 @@ class _SwitchExampleState extends State<SwitchExample> {
         ),
         SizedBox(height: 40),
         BlocBuilder<SwitchBloc, SwitchState>(
+          buildWhen: (previous, current) => previous.slider != current.slider,
           builder: (context, state) {
+            // print('hello');
             return Slider(
               value: state.slider,
               onChanged: (value) {
